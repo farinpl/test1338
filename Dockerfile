@@ -1,11 +1,6 @@
 FROM mhart/alpine-node:8
 
-
-
-
 # inspired by https://github.com/Locke/docker-iobroker
-
-
 
 RUN apk add --no-cache bash python build-base
 RUN apk add --update git
