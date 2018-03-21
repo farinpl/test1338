@@ -11,6 +11,7 @@ RUN apk add --no-cache bash python build-base
 RUN apk add --update git
 RUN apk add --update openssh
 
+
 RUN mkdir -p /opt/iobroker/
 WORKDIR /opt/iobroker/
 RUN npm install iobroker --unsafe-perm && echo $(hostname) > .install_host
