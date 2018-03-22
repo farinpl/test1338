@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # inspired by https://hub.docker.com/r/buanet/iobroker/
 
-RUN apt-get update && apt-get install -y build-essential python apt-utils curl openssh git libpcap-dev libavahi-compat-libdnssd-dev libfontconfig gnupg2 locales procps libudev-dev unzip sudo wget
+RUN apt-get update && apt-get install -y build-essential python apt-utils curl git libpcap-dev libavahi-compat-libdnssd-dev libfontconfig gnupg2 locales procps libudev-dev unzip sudo wget
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
 RUN apt-get install -y nodejs
