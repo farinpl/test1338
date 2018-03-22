@@ -9,30 +9,16 @@ RUN apt-get update && apt-get install -y build-essential python apt-utils curl g
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
 RUN apt-get install -y nodejs
 
-ENV LANG de_DE.UTF-8 
-RUN cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
-RUN mkdir -p /opt/iobroker/ && chmod 777 /opt/iobroker/
-RUN mkdir -p /opt/scripts/ && chmod 777 /opt/scripts/
-
-WORKDIR /opt/scripts/
-
-ADD scripts/iobroker_startup.sh iobroker_startup.sh
-RUN chmod +x iobroker_startup.sh
-
+RUN mkdir -p /opt/iobroker/
+WORKDIR /opt/iobroker/
+RUN npm install iobroker --unsafe-perm && echo $(hostname) > .install_host
 ADD scripts/run.sh run.sh
 RUN chmod +x run.sh
-
-WORKDIR /opt/iobroker/
-
-RUN npm install iobroker --unsafe-perm && echo $(hostname) > .install_host
-RUN update-rc.d iobroker.sh remove
-RUN npm install node-gyp -g
-
 VOLUME /opt/iobroker/
 
-EXPOSE 8081
 
-CMD ["sh", "/opt/scripts/iobroker_startup.sh"]
+EXPOSE 8081
+CMD /opt/iobroker/run.sh
 
 ENV DEBIAN_FRONTEND teletype
