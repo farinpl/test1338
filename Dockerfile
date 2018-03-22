@@ -15,14 +15,21 @@ RUN cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 RUN mkdir -p /opt/iobroker/ && chmod 777 /opt/iobroker/
 RUN mkdir -p /opt/scripts/ && chmod 777 /opt/scripts/
 
+WORKDIR /opt/scripts/
+
 ADD scripts/iobroker_startup.sh iobroker_startup.sh
 RUN chmod +x iobroker_startup.sh
+
+ADD scripts/run.sh run.sh
+RUN chmod +x run.sh
 
 WORKDIR /opt/iobroker/
 
 RUN npm install iobroker --unsafe-perm && echo $(hostname) > .install_host
 RUN update-rc.d iobroker.sh remove
 RUN npm install node-gyp -g
+
+VOLUME /opt/iobroker/
 
 EXPOSE 8081
 
