@@ -29,11 +29,6 @@ net-tools \
 vim \
 screenfetch 
  
- 
-## Clean up APT when done
-    apt-get autoremove \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
 RUN apt-get install -y nodejs
